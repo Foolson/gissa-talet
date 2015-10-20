@@ -176,18 +176,18 @@ int main()
                         if(slumpadKvitt == svarKvitt)
                         {
                             poang = poang * 2;
-                            cout << poang << endl;
+                            cout << "Du gisade på rätt siffra och du har nu " << poang << " poäng" << endl;
                         }
                         else
                         {
                             poang = 0;
-                            cout << poang << endl;
+                            cout << "Du gissade på fel siffra och du har nu förlorat alla dina poäng" << endl;
                         }
                          
                     }
                     else
                     {
-                        cout << "Du har inte nått kriterierna för att spela kvitt eller dubbelt" << endl;
+                        cout << "Du har inte nått kriterierna för att få spela kvitt eller dubbelt än" << endl;
                     }
             }
 
