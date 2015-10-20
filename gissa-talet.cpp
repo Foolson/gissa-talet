@@ -148,7 +148,7 @@ int main()
             }
             
             poangRunda = gePoang(rundaGissningar);
-            cout << "Du har vunnit " << poangRunda << " poäng" << endl;
+            cout << "Du har vunnit " << poangRunda << " poäng och du har totalt " << poang << " poäng" << endl;
             
             poang = poang + poangRunda;
             
