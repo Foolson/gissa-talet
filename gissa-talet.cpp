@@ -148,11 +148,9 @@ int main()
             }
             
             poangRunda = gePoang(rundaGissningar);
+            poang = poang + poangRunda;
             cout << "Du har vunnit " << poangRunda << " poäng och du har totalt " << poang << " poäng" << endl;
             
-            poang = poang + poangRunda;
-            
-
             kvittDubbelt = spelaNy("kvitt eller dubbelt");
                 
             if( kvittDubbelt == true)
