@@ -114,12 +114,13 @@ int main()
         
         while(1)
         {
+        	runda = runda + 1;
+
             cout << "Ny runda" << endl;
             cout << "Du har " << poang << " poäng" << endl;
-            runda = runda + 1;
-            cout << "#Runda: " << runda << endl;
             
             slumpadeSiffror[runda] = slumpaSiffra();
+
             cout << "#Fusk: " << slumpadeSiffror[runda] << endl;
             
             rundaGissningar = 0;
@@ -128,22 +129,21 @@ int main()
             {
                 antalGissningar = antalGissningar + 1;
                 rundaGissningar = rundaGissningar + 1;
-                cout << "#Antal gissningar: " << rundaGissningar << endl;
                 
                 gissadeSiffror[antalGissningar] = gissaSiffra();
                 
                 if(slumpadeSiffror[runda] == gissadeSiffror[antalGissningar])
                 {
-                    cout << "Rätt svar"<< endl;
+                    cout << "Du gissade rätt!"<< endl;
                     break;
                 }
                 else if(slumpadeSiffror[runda] < gissadeSiffror[antalGissningar])
                 {
-                    cout << "Större än rätt svar" << endl;
+                    cout << "Det rätta svaret är mindre" << endl;
                 }
                 else if(slumpadeSiffror[runda] > gissadeSiffror[antalGissningar])
                 {
-                    cout << "Mindre än rätt svar" << endl;
+                    cout << "Det rätta svaret är större" << endl;
                 }
             }
             
