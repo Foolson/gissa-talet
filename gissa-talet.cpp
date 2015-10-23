@@ -70,7 +70,7 @@ bool spelaNy(string fraga)
 
 int gePoang(int antal)
 {
-    if(antal == 1)
+    if(antal == 0)
     {
         return 10;
     }
