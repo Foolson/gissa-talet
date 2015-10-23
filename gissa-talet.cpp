@@ -9,7 +9,6 @@ int slumpaSiffra(int slumpMin, int slumpMax)
 {
     int slumpadSiffra;
     
-    srand(time(0));
     slumpadSiffra = rand() % slumpMax + slumpMin;
     
     return slumpadSiffra;
@@ -103,6 +102,8 @@ int main()
     int kvittSiffror[5];
     int slumpadKvitt;
     int svarKvitt;
+
+    srand(time(NULL));
     
     while(1)
     {
@@ -125,10 +126,15 @@ int main()
             
             antalGissningar = -1;
             
-            for (int i = 0;i < 50 ; i++)
-          	{
-          		gissadeSiffror[i] = slumpaSiffra(1, 50);
-          	}
+            //Fyll arrayen med gissningar med siffror så det alltid finns siffror till kvitt eller dubbelt fast man bara gissat en gång
+            //Detta nollställer också gissningarna i början av varje runda
+            for (int i = 0, j = 1 ; i < 50, j < 51 ; i++, j++)
+            {
+                gissadeSiffror[i] = j;
+            }
+
+            //Shuffla siffrorna så det aldrig är sanna under samma runda
+            random_shuffle(&gissadeSiffror[0], &gissadeSiffror[50]);
             
             while(1)
             {
@@ -162,23 +168,23 @@ int main()
             {
                     if(poang > 0)
                     {
-                        for(int i =0; i < 5; i++)
-                        {   
-                        	kvittSiffror[i] = slumpadeSiffror[slumpaSiffra(0, 50)];
+                        for(int i = 0; i < 5; i++)
+                        {
+                            kvittSiffror[i] = gissadeSiffror[i];
                         }
 
                         slumpadKvitt = kvittSiffror[rand() % 5];
                         
                         cout << "#Fusk: " << slumpadKvitt << endl;
                         
-                        cout << "Välj siffra" << endl;
-                        for ( int i = 0; i < 5; i++ )
+                        cout << "Pssst... Ta en av dessa:" << endl;
+                        for ( int i = 0; i < 5; i++)
                         {
                           cout << kvittSiffror[i] << ' ';
                         }
-                        cin >> svarKvitt;
-                        cin.clear();
-                        cin.ignore(5000, '\n');
+                        cout << endl;
+
+                        svarKvitt = gissaSiffra();
                         
                         if(slumpadKvitt == svarKvitt)
                         {
