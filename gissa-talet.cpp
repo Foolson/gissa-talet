@@ -127,21 +127,7 @@ int main()
             
             for (int i = 0;i < 50 ; i++)
           	{
-          	  while(1)
-          	  {
-          	    int a;
-                int * b;
-                
-                a = slumpaSiffra(1, 50);
-                
-                b = find (gissadeSiffror, gissadeSiffror+50, a);
-                
-                if(b == gissadeSiffror+50)
-                {
-          		    gissadeSiffror[i] = a;
-          		    break;
-                }
-          	  }
+          		gissadeSiffror[i] = slumpaSiffra(1, 50);
           	}
             
             while(1)
@@ -177,25 +163,10 @@ int main()
                     if(poang > 0)
                     {
                         for(int i =0; i < 5; i++)
-                        {
-                          while(1)
-                          {
-                            int a;
-                            int b;
-                            int * c;
-                            
-                            a = slumpaSiffra(0, 50);
-                            b = slumpadeSiffror[a];
-                            
-                            c = find (kvittSiffror, kvittSiffror+5, b);
-                            
-                            if(c != kvittSiffror+5)
-                            {
-                              kvittSiffror[i] = slumpadeSiffror[a];
-                              break;
-                            }
-                          }
+                        {   
+                        	kvittSiffror[i] = slumpadeSiffror[slumpaSiffra(0, 50)];
                         }
+
                         slumpadKvitt = kvittSiffror[rand() % 5];
                         
                         cout << "#Fusk: " << slumpadKvitt << endl;
