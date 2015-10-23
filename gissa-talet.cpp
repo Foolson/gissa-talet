@@ -1,15 +1,16 @@
 #include <iostream>
 #include <ctime>
 #include <cstdlib>
+#include <algorithm>
 
 using namespace std;
 
-int slumpaSiffra()
+int slumpaSiffra(int slumpMin, int slumpMax)
 {
     int slumpadSiffra;
     
-    srand(time(NULL));
-    slumpadSiffra = rand() % 50 + 1;
+    srand(time(0));
+    slumpadSiffra = rand() % slumpMax + slumpMin;
     
     return slumpadSiffra;
 }
@@ -20,7 +21,7 @@ int gissaSiffra()
     
     while(1)
     {
-        cout << "Vilket tal vill du gissa på?" << endl;
+        cout << "Vilken siffra vill du gissa på?" << endl;
         cout << "1-50: "; cin >> gissadSiffra;
         cin.clear();
         cin.ignore(5000, '\n');
@@ -73,11 +74,11 @@ int gePoang(int antal)
     {
         return 10;
     }
-    else if(antal < 3)
+    else if(antal < 2)
     {
         return 5;
     }
-    else if(antal < 10)
+    else if(antal < 9)
     {
         return 1;
     }
@@ -110,7 +111,6 @@ int main()
         poang = 0;
         
         runda = -1;
-        antalGissningar = -1;
         
         while(1)
         {
@@ -119,11 +119,30 @@ int main()
             cout << "Ny runda" << endl;
             cout << "Du har " << poang << " poäng" << endl;
             
-            slumpadeSiffror[runda] = slumpaSiffra();
+            slumpadeSiffror[runda] = slumpaSiffra(1, 50);
 
             cout << "#Fusk: " << slumpadeSiffror[runda] << endl;
             
-            rundaGissningar = 0;
+            antalGissningar = -1;
+            
+            for (int i = 0;i < 50 ; i++)
+          	{
+          	  while(1)
+          	  {
+          	    int a;
+                int * b;
+                
+                a = slumpaSiffra(1, 50);
+                
+                b = find (gissadeSiffror, gissadeSiffror+50, a);
+                
+                if(b == gissadeSiffror+50)
+                {
+          		    gissadeSiffror[i] = a;
+          		    break;
+                }
+          	  }
+          	}
             
             while(1)
             {
@@ -147,7 +166,7 @@ int main()
                 }
             }
             
-            poangRunda = gePoang(rundaGissningar);
+            poangRunda = gePoang(antalGissningar);
             poang = poang + poangRunda;
             cout << "Du har vunnit " << poangRunda << " poäng och du har totalt " << poang << " poäng" << endl;
             
@@ -155,20 +174,37 @@ int main()
                 
             if( kvittDubbelt == true)
             {
-                    if(antalGissningar > 3 && poang > 0)
+                    if(poang > 0)
                     {
-                        kvittSiffror[0] = gissadeSiffror[0];
-                        kvittSiffror[1] = gissadeSiffror[1];
-                        kvittSiffror[2] = gissadeSiffror[2];
-                        kvittSiffror[3] = gissadeSiffror[3];
-                        kvittSiffror[4] = gissadeSiffror[4];
-                        
+                        for(int i =0; i < 5; i++)
+                        {
+                          while(1)
+                          {
+                            int a;
+                            int b;
+                            int * c;
+                            
+                            a = slumpaSiffra(0, 50);
+                            b = slumpadeSiffror[a];
+                            
+                            c = find (kvittSiffror, kvittSiffror+5, b);
+                            
+                            if(c != kvittSiffror+5)
+                            {
+                              kvittSiffror[i] = slumpadeSiffror[a];
+                              break;
+                            }
+                          }
+                        }
                         slumpadKvitt = kvittSiffror[rand() % 5];
                         
                         cout << "#Fusk: " << slumpadKvitt << endl;
                         
                         cout << "Välj siffra" << endl;
-                        cout << kvittSiffror[0] << ", " << kvittSiffror[1] << ", " << kvittSiffror[2] << ", " << kvittSiffror[3] << ", " << kvittSiffror[4] << ": ";
+                        for ( int i = 0; i < 5; i++ )
+                        {
+                          cout << kvittSiffror[i] << ' ';
+                        }
                         cin >> svarKvitt;
                         cin.clear();
                         cin.ignore(5000, '\n');
